@@ -1,7 +1,9 @@
 # MVF-Net: Multi-View 3D Face Morphable Model Regression
 Testing code for the paper.
 >[MVF-Net: Multi-View 3D Face Morphable Model Regression](https://arxiv.org/abs/1904.04473).
+
 >Fanzi Wu*, Linchao Bao*, Yajing Chen, Yonggen Ling, Yibing Song, Songnan Li, King Ngi Ngan, Wei Liu.
+
 >CVPR 2019.
 
 ## Installation
@@ -22,5 +24,5 @@ folder.
 ```
 and change `line 15` in `test_img.py` as:
 ```
-crop = True
+crop_opt = True
 ```
