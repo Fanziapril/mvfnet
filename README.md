@@ -26,7 +26,7 @@ and change `line 15` in `test_img.py` as:
 crop_opt = True
 ```
 ## Citation
-If you find this work useful in your research, please consider cite:
+If you find this work useful in your research, please cite:
 ```
 @article{wu2019mvf,
   title={MVF-Net: Multi-View 3D Face Morphable Model Regression},
