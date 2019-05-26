@@ -5,9 +5,11 @@ Testing code for the paper.
 > CVPR 2019.
 
 ## Installation
-1. Python 2.7
-2. Pytorch 0.4
-3. `Model_shape.mat` and `Model_Expression.mat` from [3DDFA](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm).
+1. Python 2.7 (Numpy, PIL, scipy)
+2. Pytorch 0.4.0, torchvision
+3. face-alignment package from [https://github.com/1adrianb/face-alignment](https://github.com/1adrianb/face-alignment). This code is used for face croppinga and will be replaced by face detection algorithm in the future.
+
+4. `Model_shape.mat` and `Model_Expression.mat` from [3DDFA](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm).
 ## Test
 You can download the CNN model from [here](https://www.dropbox.com/s/7ds3aesjjmybjh9/net.pth?dl=0) and copy it into `data` folder.
 Then you can test the model by:
