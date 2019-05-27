@@ -5,10 +5,9 @@ import torchvision.transforms as transforms
 from PIL import Image
 import pandas as pd
 import sys
-import pdb
 
 model_shape = io.loadmat('data/Model_Shape.mat')
-model_exp = io.loadmat('data/Model_Expression.mat')
+model_exp = io.loadmat('data/Model_Exp.mat')
 data = io.loadmat('data/sigma_exp.mat')
 
 def preds_to_shape(preds):

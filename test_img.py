@@ -1,6 +1,5 @@
 import torch
 import argparse
-from skimage import io
 import os
 from PIL import Image
 import tools
