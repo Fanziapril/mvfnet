@@ -34,10 +34,10 @@ crop_opt = True
 ## Citation
 If you find this work useful in your research, please cite:
 ```
-@article{wu2019mvf,
+@inproceedings{wu2019mvf,
   title={MVF-Net: Multi-View 3D Face Morphable Model Regression},
   author={Wu, Fanzi and Bao, Linchao and Chen, Yajing and Ling, Yonggen and Song, Yibing and Li, Songnan and Ngan, King Ngi and Liu, Wei},
-  journal={arXiv preprint arXiv:1904.04473},
+  booktitle={arXiv preprint arXiv:1904.04473},
   year={2019}
 }
 ```
