@@ -4,10 +4,14 @@ Testing code for the paper.
 > Fanzi Wu*, Linchao Bao*, Yajing Chen, Yonggen Ling, Yibing Song, Songnan Li, King Ngi Ngan, Wei Liu. 
 > CVPR 2019.
 
+## Todo
+- Code for rendering images.
+- Replace image cropping scheme.
+
 ## Installation
 1. Python 2.7 (Numpy, PIL, scipy)
 2. Pytorch 0.4.0, torchvision
-3. face-alignment package from [https://github.com/1adrianb/face-alignment](https://github.com/1adrianb/face-alignment). This code is used for face croppinga and will be replaced by face detection algorithm in the future.
+3. face-alignment package from [https://github.com/1adrianb/face-alignment](https://github.com/1adrianb/face-alignment). This code is used for face cropping and will be replaced by face detection algorithm in the future.
 
 4. `Model_shape.mat` and `Model_Expression.mat` from [3DDFA](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm).
 ## Test
