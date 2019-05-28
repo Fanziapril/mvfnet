@@ -37,7 +37,7 @@ If you find this work useful in your research, please cite:
 @inproceedings{wu2019mvf,
   title={MVF-Net: Multi-View 3D Face Morphable Model Regression},
   author={Wu, Fanzi and Bao, Linchao and Chen, Yajing and Ling, Yonggen and Song, Yibing and Li, Songnan and Ngan, King Ngi and Liu, Wei},
-  booktitle={arXiv preprint arXiv:1904.04473},
+  booktitle={CVPR},
   year={2019}
 }
 ```
