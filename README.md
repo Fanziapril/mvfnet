@@ -4,10 +4,6 @@ Testing code for the paper.
 > Fanzi Wu*, Linchao Bao*, Yajing Chen, Yonggen Ling, Yibing Song, Songnan Li, King Ngi Ngan, Wei Liu. 
 > CVPR 2019.
 
-## Todo
-- Code for rendering images.
-- Replace image cropping scheme.
-
 ## Installation
 1. Python 2.7 (Numpy, PIL, scipy)
 2. Pytorch 0.4.0, torchvision
