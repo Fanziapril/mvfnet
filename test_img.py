@@ -31,11 +31,6 @@ model.load_state_dict(ckpt)
 input_tensor = torch.cat([imgA, imgB, imgC], 0).view(1, 9, 224, 224).cuda()
 start = time.time()
 preds = model(input_tensor)
-print time.time() -start
+print(time.time() -start)
 faces3d = tools.preds_to_shape(preds[0].detach().cpu().numpy())
 tools.write_ply(os.path.join(options.save_dir, 'shape.ply'), faces3d[0], faces3d[1])
-       
-
-
-
-

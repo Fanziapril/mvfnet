@@ -5,10 +5,46 @@ import torchvision.transforms as transforms
 from PIL import Image
 import pandas as pd
 import sys
+import math
 
 model_shape = io.loadmat('data/Model_Shape.mat')
+kpt_index = np.reshape(model_shape['keypoints'], 68).astype(np.int32) - 1
 model_exp = io.loadmat('data/Model_Expression.mat')
 data = io.loadmat('data/sigma_exp.mat')
+pose_mean = np.array([0,0,0,112,112,0,0]).astype(np.float32)
+pose_std = np.array([math.pi/2.0,math.pi/2.0,math.pi/2.0,56,56,1,224.0 / (2 * 180000.0)]).astype(np.float32)
+
+def angle_to_rotation(angles):
+    phi = angles[0]
+    gamma = angles[1]
+    theta = angles[2]
+    
+    R_x = np.eye(3)
+    R_x[1, 1] = math.cos(phi)
+    R_x[1, 2] = math.sin(phi)
+    R_x[2, 1] = - math.sin(phi)
+    R_x[2, 2] = math.cos(phi)
+
+    R_y = np.eye(3)
+    R_y[0, 0] = math.cos(gamma)
+    R_y[0, 2] = - math.sin(gamma)
+    R_y[2, 0] = math.sin(gamma)
+    R_y[2, 2] = math.cos(gamma)
+
+    R_z = np.eye(3)
+    R_z[0, 0] = math.cos(theta)
+    R_z[0, 1] = math.sin(theta)
+    R_z[1, 0] = - math.sin(theta)
+    R_z[1, 1] = math.cos(theta)
+
+    return np.matmul(np.matmul(R_x, R_y), R_z)
+
+def preds_to_pose(preds):
+    pose = preds * pose_std + pose_mean
+    R = angle_to_rotation(pose[:3])
+    t2d = pose[3:5]
+    s = pose[6]
+    return R, t2d, s
 
 def preds_to_shape(preds):
     # paras = torch.mul(preds[:228, :], label_std[:199+29, :])
@@ -17,9 +53,17 @@ def preds_to_shape(preds):
     face_shape = np.matmul(model_shape['w'], alpha) + np.matmul(model_exp['w_exp'], beta) + model_shape['mu_shape']
     face_shape = face_shape.reshape(-1, 3)
     
-    #obj['v'] = face_shape
-    #obj['tri'] = model_shape['tri'].transpose()
-    return [face_shape, model_shape['tri'].astype(np.int64).transpose() - 1]
+    R, t, s = preds_to_pose(preds[228:228+7])
+    kptA = np.matmul(face_shape[kpt_index], s*R[:2].transpose()) + np.repeat(np.reshape(t,[1,2]), 68, axis=0) 
+    kptA[:, 1] = 224 - kptA[:, 1]
+    R, t, s = preds_to_pose(preds[228+7:228+14])
+    kptB = np.matmul(face_shape[kpt_index], s*R[:2].transpose()) + np.repeat(np.reshape(t,[1,2]), 68, axis=0)
+    kptB[:, 1] = 224 - kptB[:, 1]
+    
+    R, t, s = preds_to_pose(preds[228+14:])
+    kptC = np.matmul(face_shape[kpt_index], s*R[:2].transpose()) + np.repeat(np.reshape(t,[1,2]), 68, axis=0)
+    kptC[:, 1] = 224 - kptC[:, 1]
+    return [face_shape, model_shape['tri'].astype(np.int64).transpose() - 1, kptA, kptB, kptC]
     
     
 def crop_image(image, res=224):
